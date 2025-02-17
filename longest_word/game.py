@@ -3,6 +3,11 @@
 
 import random
 import string
+import nltk
+
+# Ensure the English words corpus is available
+nltk.download('words')
+from nltk.corpus import words
 
 class Game:
     """A class representing a word validation game."""
@@ -12,7 +17,7 @@ class Game:
         self.grid = ''.join(random.choices(string.ascii_uppercase, k=9))
 
     def is_valid(self, word: str) -> bool:
-        """Return True if and only if the word can be formed using the Game's grid."""
+        """Return True if and only if the word can be formed using the Game's grid and is in the dictionary."""
         if not word:
             return False
 
@@ -24,7 +29,7 @@ class Game:
             else:
                 return False
 
-        return True
+        return word.lower() in words.words()
 
 if __name__ == "__main__":
     game = Game()
